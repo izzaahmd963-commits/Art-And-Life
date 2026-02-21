@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art & Life — Where Creativity Meets Existence</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Simple Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #faf6f0;
+      color: #1e1a16;
+      line-height: 1.7;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    
+    /* Colors */
+    :root {
+      --ivory: #faf6f0;
+      --cream: #f2ebe0;
+      --terra: #b85c38;
+      --brown: #3d2e1e;
+      --muted: #7a6d5f;
+      --border: rgba(61,46,30,0.12);
+    }
+    
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      height: 72px; padding: 0 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(250,246,240,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.35s;
+    }
+    nav.small { height: 62px; background: rgba(250,246,240,0.97); box-shadow: 0 2px 24px rgba(61,46,30,.1); }
+    
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--terra); color: white;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-text {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.2rem; font-weight: 700; line-height: 1;
+    }
+    .logo-text small {
+      display: block; font-family: 'DM Sans', sans-serif;
+      font-size: .56rem; font-weight: 400; color: var(--muted);
+    }
+    
+    .nav-links { display: flex; list-style: none; gap: 4px; }
+    .nav-links a {
+      color: var(--muted); font-size: .86rem; font-weight: 500;
+      padding: 8px 15px; border-radius: 8px;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--brown); background: var(--cream); }
+    .nav-links .cta {
+      background: var(--terra); color: white !important;
+      padding: 9px 22px !important; border-radius: 50px !important;
+    }
+    
+    /* Mobile Menu */
+    .menu-btn {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 7px;
+    }
+    .menu-btn span {
+      width: 24px; height: 2px; background: var(--brown);
+      border-radius: 2px; transition: all 0.38s;
+    }
+    .menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-btn.open span:nth-child(2) { opacity: 0; }
+    .menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    
+    .mobile-panel {
+      position: fixed; top: 0; right: 0; bottom: 0; width: 300px; z-index: 1000;
+      background: var(--ivory); border-left: 1px solid var(--border);
+      padding: 60px 44px; transform: translateX(100%);
+      transition: transform 0.45s;
+    }
+    .mobile-panel.open { transform: none; }
+    .mobile-panel a {
+      display: block; font-family: 'Libre Baskerville', serif;
+      font-size: 1.7rem; font-style: italic; color: var(--cream);
+      padding: 8px 0; opacity: 0; transform: translateX(20px);
+      transition: all 0.4s;
+    }
+    .mobile-panel.open a { opacity: 1; transform: none; }
+    .mobile-panel a:hover { color: var(--terra); }
+    
+    .menu-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(30,26,22,.35); opacity: 0;
+      pointer-events: none; transition: opacity 0.4s;
+    }
+    .menu-overlay.open { opacity: 1; pointer-events: all; }
+    
+    /* ===== HERO ===== */
+    #home {
+      min-height: 100vh; background: var(--cream);
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; padding-top: 72px;
+    }
+    .hero-content { padding: 80px 8% 80px 6%; }
+    .hero-tag {
+      display: flex; align-items: center; gap: 9px;
+      font-size: .7rem; font-weight: 600; color: var(--terra);
+      margin-bottom: 22px;
+    }
+    .hero-tag::before { content: ''; width: 28px; height: 1.5px; background: var(--terra); }
+    .hero-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(2.8rem, 4.5vw, 5rem);
+      font-weight: 700; line-height: 1.08; margin-bottom: 20px;
+    }
+    .hero-title em { font-style: italic; color: var(--terra); }
+    .hero-text {
+      font-size: 1rem; color: var(--muted);
+      margin-bottom: 36px; max-width: 420px;
+    }
+    .buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 13px 28px; border-radius: 50px;
+      font-weight: 600; font-size: .88rem; border: none;
+      cursor: pointer; transition: all 0.3s;
+    }
+    .btn-primary { background: var(--terra); color: white; }
+    .btn-outline { background: transparent; color: var(--brown); border: 1.5px solid var(--border); }
+    
+    .stats {
+      display: flex; gap: 30px; margin-top: 42px;
+      padding-top: 34px; border-top: 1px solid var(--border);
+    }
+    .stat-number {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.9rem; font-weight: 700; color: var(--terra);
+    }
+    .stat-label { font-size: .72rem; color: var(--muted); }
+    
+    .hero-images {
+      height: 100vh; display: grid;
+      grid-template-columns: 1fr 1fr; gap: 4px;
+    }
+    .hero-images div { overflow: hidden; }
+    .hero-images img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s;
+    }
+    .hero-images img:hover { transform: scale(1.06); }
+    .hero-images :nth-child(1) { grid-row: 1/3; }
+    
+    /* ===== SECTIONS ===== */
+    section { padding: 96px 6%; }
+    .section-tag {
+      display: flex; align-items: center; gap: 10px;
+      font-size: .7rem; font-weight: 600; color: var(--terra);
+      margin-bottom: 12px;
+    }
+    .section-tag::before { content: ''; width: 22px; height: 1.5px; background: var(--terra); }
+    .section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      font-weight: 700; margin-bottom: 16px;
+    }
+    .section-title em { font-style: italic; color: var(--terra); }
+    .section-text {
+      color: var(--muted); font-size: .97rem;
+      max-width: 500px; font-weight: 300;
+    }
+    
+    /* Reveal Animation */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s; }
+    .reveal.show { opacity: 1; transform: none; }
+    
+    /* ===== SLIDESHOW ===== */
+    .slideshow { max-width: 960px; margin: 56px auto 0; }
+    .slideshow-container {
+      position: relative; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(61,46,30,.15);
+    }
+    .slides { position: relative; height: 520px; }
+    .slide {
+      position: absolute; inset: 0; opacity: 0;
+      transform: scale(1.05); transition: all 0.7s;
+    }
+    .slide.active { opacity: 1; transform: scale(1); }
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+    .slide-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 60px 40px 34px;
+      background: linear-gradient(to top, rgba(30,26,22,.88), transparent);
+      opacity: 0; transform: translateY(14px);
+      transition: all 0.55s 0.2s;
+    }
+    .slide.active .slide-caption { opacity: 1; transform: none; }
+    .caption-badge {
+      display: inline-block; background: var(--terra); color: white;
+      font-size: .68rem; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px;
+    }
+    .slide-caption h3 {
+      font-family: 'Libre Baskerville', serif; font-style: italic;
+      font-size: 1.7rem; color: white; margin-bottom: 6px;
+    }
+    .slide-caption p { font-size: .87rem; color: rgba(255,255,255,.65); }
+    
+    .slide-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(250,246,240,.9); border: 1px solid var(--border);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s;
+    }
+    .slide-arrow:hover { background: var(--terra); color: white; }
+    .prev { left: 18px; }
+    .next { right: 18px; }
+    
+    .progress-bar {
+      position: absolute; bottom: 0; left: 0; height: 3px;
+      background: var(--terra); transition: width 0.12s;
+    }
+    .slide-counter {
+      position: absolute; top: 18px; right: 18px;
+      background: rgba(250,246,240,.88); padding: 5px 16px;
+      border-radius: 50px; font-size: .77rem;
+    }
+    .slide-counter strong { color: var(--terra); }
+    
+    .dots {
+      display: flex; gap: 8px; justify-content: center;
+      margin-top: 18px;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--cream); border: 1.5px solid var(--border);
+      cursor: pointer; transition: all 0.35s;
+    }
+    .dot.active { background: var(--terra); width: 26px; border-radius: 4px; }
+    
+    .thumbnails {
+      display: flex; gap: 10px; margin-top: 14px;
+      overflow-x: auto; padding-bottom: 2px;
+    }
+    .thumb {
+      flex-shrink: 0; width: 92px; height: 60px; border-radius: 10px;
+      overflow: hidden; border: 2px solid transparent;
+      cursor: pointer; opacity: .45; transition: all 0.3s;
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .thumb.active { border-color: var(--terra); opacity: 1; transform: scale(1.06); }
+    
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center; margin-top: 52px;
+    }
+    .about-image {
+      position: relative; border-radius: 20px; overflow: hidden;
+      height: 460px; box-shadow: 0 20px 60px rgba(61,46,30,.15);
+    }
+    .about-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s;
+    }
+    .about-image:hover img { transform: scale(1.04); }
+    .about-badge {
+      position: absolute; bottom: -18px; left: -18px;
+      background: var(--terra); color: white; border-radius: 16px;
+      padding: 18px 22px; text-align: center;
+      font-family: 'Libre Baskerville', serif; font-size: 1.1rem;
+      box-shadow: 0 10px 30px rgba(184,92,56,.4);
+    }
+    .about-list { list-style: none; margin-top: 28px; }
+    .about-list li {
+      display: flex; align-items: flex-start; gap: 13px;
+      font-size: .92rem; color: var(--muted); margin-bottom: 13px;
+    }
+    .about-list i { color: var(--terra); font-size: .75rem; }
+    
+    /* ===== ACCORDION ===== */
+    .accordion { max-width: 800px; margin: 56px auto 0; }
+    .accordion-item {
+      border: 1px solid var(--border); border-radius: 14px;
+      background: white; margin-bottom: 10px;
+    }
+    .accordion-item.open {
+      border-color: rgba(184,92,56,.35);
+      box-shadow: 0 6px 28px rgba(184,92,56,.08);
+    }
+    .accordion-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; cursor: pointer;
+    }
+    .header-left { display: flex; align-items: center; gap: 16px; }
+    .accordion-number {
+      font-family: 'Libre Baskerville', serif; font-style: italic;
+      font-size: 1rem; font-weight: 700; color: var(--terra);
+    }
+    .accordion-title {
+      font-family: 'Libre Baskerville', serif; font-size: 1rem;
+      font-weight: 700; transition: color 0.3s;
+    }
+    .accordion-header:hover .accordion-title { color: var(--terra); }
+    .accordion-icon {
+      width: 34px; height: 34px; border-radius: 9px;
+      border: 1.5px solid var(--border); background: var(--ivory);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.38s;
+    }
+    .accordion-item.open .accordion-icon {
+      transform: rotate(180deg);
+      background: var(--terra); color: white;
+    }
+    .accordion-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.45s;
+    }
+    .accordion-content {
+      padding: 18px 24px 22px 68px;
+      color: var(--muted); font-size: .9rem; font-weight: 300;
+      border-top: 1px solid var(--border);
+    }
+    
+    /* ===== CONTACT ===== */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 60px; margin-top: 56px;
+    }
+    .info-cards { display: flex; flex-direction: column; gap: 12px; }
+    .info-card {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: white; border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px 20px;
+      transition: all 0.3s;
+    }
+    .info-card:hover {
+      border-color: rgba(184,92,56,.3);
+      transform: translateX(5px);
+    }
+    .info-icon {
+      width: 42px; height: 42px; border-radius: 11px;
+      background: rgba(184,92,56,.1);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .info-icon i { color: var(--terra); }
+    
+    .quote-box {
+      background: white; border-left: 3px solid var(--terra);
+      border-radius: 0 14px 14px 0; padding: 22px; margin-top: 4px;
+    }
+    .quote-box q {
+      font-family: 'Libre Baskerville', serif; font-style: italic;
+      font-size: 1rem; color: var(--brown); line-height: 1.7;
+    }
+    
+    .rules-box {
+      background: rgba(184,92,56,.05); border: 1px solid rgba(184,92,56,.15);
+      border-radius: 14px; padding: 20px 22px; margin-top: 4px;
+    }
+    .rules-box h4 {
+      font-size: .75rem; color: var(--terra); margin-bottom: 10px;
+    }
+    .rules-box ul { list-style: none; }
+    .rules-box li {
+      font-size: .82rem; color: var(--muted);
+      display: flex; align-items: center; gap: 8px; margin-bottom: 7px;
+    }
+    
+    /* Form */
+    .form-card {
+      background: white; border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 32px;
+    }
+    .form-card h3 {
+      font-family: 'Libre Baskerville', serif; font-size: 1.45rem;
+      font-style: italic; margin-bottom: 26px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    
+    .field {
+      display: flex; flex-direction: column; gap: 6px;
+      margin-bottom: 14px; position: relative;
+    }
+    .field label {
+      font-size: .73rem; font-weight: 600; color: var(--muted);
+    }
+    .field.valid label { color: #6b7c5e; }
+    .field.invalid label { color: #c0473a; }
+    
+    .field input, .field textarea, .field select {
+      padding: 13px 44px 13px 14px;
+      background: var(--ivory); border: 1.5px solid var(--border);
+      border-radius: 10px; font-family: 'DM Sans', sans-serif;
+      font-size: .88rem; outline: none; transition: all 0.3s;
+      width: 100%;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: var(--terra); background: white;
+      box-shadow: 0 0 0 3px rgba(184,92,56,.1);
+    }
+    .field.valid input, .field.valid textarea, .field.valid select {
+      border-color: #6b7c5e;
+      box-shadow: 0 0 0 3px rgba(107,124,94,.12);
+    }
+    .field.invalid input, .field.invalid textarea, .field.invalid select {
+      border-color: #c0473a;
+      box-shadow: 0 0 0 3px rgba(192,71,58,.1);
+    }
+    
+    .field-icon {
+      position: absolute; right: 13px; top: 37px;
+      font-size: .85rem; opacity: 0; transition: all 0.3s;
+    }
+    .field.valid .field-icon { opacity: 1; color: #6b7c5e; }
+    .field.invalid .field-icon { opacity: 1; color: #c0473a; }
+    
+    .field-error {
+      font-size: .73rem; color: #c0473a; min-height: 17px;
+      opacity: 0; transform: translateY(-4px); transition: all 0.3s;
+    }
+    .field.invalid .field-error { opacity: 1; transform: none; }
+    
+    @keyframes shake {
+      0%,100%{transform:translateX(0)}
+      15%{transform:translateX(-7px)}30%{transform:translateX(7px)}
+      45%{transform:translateX(-4px)}60%{transform:translateX(4px)}
+      75%{transform:translateX(-2px)}
+    }
+    .field.shake { animation: shake .44s; }
+    
+    .char-count {
+      font-size: .72rem; color: var(--muted);
+      text-align: right; margin-top: -10px; margin-bottom: 14px;
+    }
+    
+    .submit-btn {
+      width: 100%; padding: 15px; background: var(--terra); color: white;
+      font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: .95rem;
+      border: none; border-radius: 50px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      transition: all 0.3s;
+    }
+    .submit-btn:hover {
+      background: #d4724a; transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(184,92,56,.38);
+    }
+    .submit-btn:disabled { opacity: .55; cursor: not-allowed; }
+    
+    .success-message {
+      display: none; flex-direction: column; align-items: center;
+      text-align: center; gap: 18px; padding: 52px 20px;
+    }
+    .success-message.show { display: flex; }
+    .success-icon {
+      width: 82px; height: 82px; border-radius: 50%;
+      border: 2px solid rgba(107,124,94,.4);
+      background: rgba(107,124,94,.08);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .success-icon i { font-size: 2rem; color: #6b7c5e; }
+    
+    /* Footer */
+    footer {
+      background: #1e1a16; color: rgba(255,255,255,.45);
+      padding: 28px 6%; display: flex;
+      justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 14px;
+    }
+    .footer-logo {
+      font-family: 'Libre Baskerville', serif; font-size: 1rem;
+      color: white; font-style: italic;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: .78rem; color: rgba(255,255,255,.4); }
+    .footer-links a:hover { color: #e8956d; }
+    
+    /* Responsive */
+    @media(max-width:1000px) {
+      #home { grid-template-columns: 1fr; }
+      .hero-images { height: 55vw; min-height: 280px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .slides { height: 320px; }
+    }
+    @media(max-width:768px) {
+      .nav-links { display: none; }
+      .menu-btn { display: flex; }
+      section { padding: 64px 5%; }
+      .hero-images { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#home" class="logo">
+    <div class="logo-icon"><i class="fas fa-palette"></i></div>
+    <div class="logo-text">
+      Art & Life
+      <small>Where Creativity Meets Existence</small>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#accordion">Explore</a></li>
+    <li><a href="#contact" class="cta">Contact Us</a></li>
+  </ul>
+
+  <button class="menu-btn" id="menuBtn">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+<div class="mobile-panel" id="mobilePanel">
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#accordion" onclick="closeMenu()">Explore</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- Hero -->
+<section id="home">
+  <div class="hero-content">
+    <div class="hero-tag">Art & Life</div>
+    <h1 class="hero-title">Life is the<br>Greatest <em>Canvas</em><br>of All</h1>
+    <p class="hero-text">Where creativity breathes life into the ordinary and transforms the everyday world into something truly extraordinary. Explore art, culture, and the beauty that surrounds us.</p>
+    <div class="buttons">
+      <a href="#gallery" class="btn btn-primary"><i class="fas fa-images"></i> View Gallery</a>
+      <a href="#accordion" class="btn btn-outline"><i class="fas fa-book-open"></i> Learn More</a>
+    </div>
+    <div class="stats">
+      <div><span class="stat-number">500+</span><div class="stat-label">Artworks</div></div>
+      <div><span class="stat-number">120</span><div class="stat-label">Artists</div></div>
+      <div><span class="stat-number">24</span><div class="stat-label">Exhibitions</div></div>
+    </div>
+  </div>
+  
+  <div class="hero-images">
+    <div><img src="https://images.unsplash.com/photo-1541367777708-7905fe3296c0?w=600&q=80&auto=format&fit=crop" alt="Art"></div>
+    <div><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80&auto=format&fit=crop" alt="Painting"></div>
+    <div><img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&q=80&auto=format&fit=crop" alt="Street Art"></div>
+  </div>
+</section>
+
+<!-- Slideshow -->
+<section id="gallery">
+  <div class="reveal">
+    <p class="section-tag">Feature 01 — Image Slideshow</p>
+    <h2 class="section-title">Art Through the <em>Ages</em></h2>
+    <p class="section-text">Auto-plays every 4 seconds with smooth fade & scale animation, progress bar, prev/next arrows, dot navigation, thumbnail strip, and keyboard arrow support.</p>
+  </div>
+
+  <div class="slideshow reveal">
+    <div class="slideshow-container">
+      <div class="slides" id="slidesContainer">
+        <!-- Slides will be created by JS -->
+      </div>
+      
+      <button class="slide-arrow prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+      <button class="slide-arrow next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+      <div class="progress-bar" id="progressBar"></div>
+      <div class="slide-counter"><strong id="currentSlide">1</strong> / 5</div>
+    </div>
+    
+    <div class="dots" id="dotsContainer"></div>
+    <div class="thumbnails" id="thumbsContainer"></div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="about-grid reveal">
+    <div class="about-image">
+      <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=800&q=80&auto=format&fit=crop" alt="About">
+      <div class="about-badge">Since<br>2020<br><small>Est. Lahore</small></div>
+    </div>
+    <div>
+      <p class="section-tag">Our Philosophy</p>
+      <h2 class="section-title">Art is Not What You <em>See</em>, But What You Make Others See</h2>
+      <p class="section-text">We believe art is not confined to galleries — it lives in every sunrise, every gesture, every act of human kindness. Our mission is to reconnect people with the creative spirit within them.</p>
+      <ul class="about-list">
+        <li><i class="fas fa-diamond"></i> Art elevates human experience far beyond the ordinary</li>
+        <li><i class="fas fa-diamond"></i> Creativity is a way of seeing the world</li>
+        <li><i class="fas fa-diamond"></i> Every culture expresses its soul through art</li>
+        <li><i class="fas fa-diamond"></i> Life without art is like a sky without stars</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Accordion -->
+<section id="accordion">
+  <div class="reveal" style="text-align:center">
+    <p class="section-tag" style="justify-content:center">Feature 02 — Accordion Menu</p>
+    <h2 class="section-title">Explore <em>Art & Life</em></h2>
+    <p class="section-text" style="margin:0 auto">Click any question to expand it. Smooth animated open/close — only one stays open at a time.</p>
+  </div>
+
+  <div class="accordion reveal" id="accordionContainer">
+    <!-- Items will be created by JS -->
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="reveal">
+    <p class="section-tag">Feature 04 — Form Validation</p>
+    <h2 class="section-title">Let's Create <em>Together</em></h2>
+    <p class="section-text">Real-time animated validation — green ✓ for valid fields, red shake ✗ for invalid. Try submitting empty to see it!</p>
+  </div>
+
+  <div class="contact-grid reveal">
+    <!-- Info Side -->
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div><h4>Pakistan</h4><p>Haripur<br>Mang</p></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-phone"></i></div>
+        <div><h4>Phone</h4><a href="tel:+92 37081739899">+92 37081739899</a></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+        <div><h4>Email</h4><a href="mailto:hello@artandlife.pk">hello@artandlife.pk</a></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-clock"></i></div>
+        <div><h4>Studio Hours</h4><p>Tue – Sun · 10:00 AM – 7:00 PM</p></div>
+      </div>
+      
+      <div class="quote-box">
+        <q>Every artist dips his brush in his own soul, and paints his own nature into his pictures.</q>
+        <footer style="margin-top:10px; color:var(--terra)">— Henry Ward Beecher</footer>
+      </div>
+      
+      <div class="rules-box">
+        <h4>Validation Rules</h4>
+        <ul>
+          <li><i class="fas fa-circle"></i> Name: minimum 2 characters</li>
+          <li><i class="fas fa-circle"></i> Email: valid format required</li>
+          <li><i class="fas fa-circle"></i> Phone: 10–15 digits (optional)</li>
+          <li><i class="fas fa-circle"></i> Subject: must be selected</li>
+          <li><i class="fas fa-circle"></i> Message: minimum 20 characters</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Form Side -->
+    <div class="form-card">
+      <h3>Send a Message</h3>
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="field" id="nameField">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" placeholder="e.g. Izza Ahmed" oninput="validateField('name')">
+            <i class="fas fa-check field-icon"></i>
+            <span class="field-error" id="nameError"></span>
+          </div>
+          
+          <div class="field" id="emailField">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" placeholder="e.g. izza@email.com" oninput="validateField('email')">
+            <i class="fas fa-check field-icon"></i>
+            <span class="field-error" id="emailError"></span>
+          </div>
+        </div>
+
+        <div class="field" id="phoneField">
+          <label for="phone">Phone <span style="font-weight:300">(optional)</span></label>
+          <input type="tel" id="phone" placeholder="e.g. 0300-*******" oninput="validateField('phone')">
+          <i class="fas fa-check field-icon"></i>
+          <span class="field-error" id="phoneError"></span>
+        </div>
+
+        <div class="field" id="subjectField">
+          <label for="subject">Area of Interest *</label>
+          <select id="subject" onchange="validateField('subject')">
+            <option value="">— Select an area —</option>
+            <option>Exhibition & Gallery</option>
+            <option>Art Workshop</option>
+            <option>Collaboration</option>
+            <option>Art Commission</option>
+            <option>General Inquiry</option>
+          </select>
+          <i class="fas fa-check field-icon"></i>
+          <span class="field-error" id="subjectError"></span>
+        </div>
+
+        <div class="field" id="messageField">
+          <label for="message">Your Message *</label>
+          <textarea id="message" placeholder="Tell us about your artistic vision or inquiry (minimum 20 characters)..." oninput="validateField('message'); updateCharCount()"></textarea>
+          <i class="fas fa-check field-icon"></i>
+          <span class="field-error" id="messageError"></span>
+        </div>
+        <div class="char-count" id="charCount">0 / 500 characters</div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+      </form>
+
+      <div class="success-message" id="successMessage">
+        <div class="success-icon"><i class="fas fa-check"></i></div>
+        <h3>Message Sent!</h3>
+        <p>Thank you for reaching out to Art & Life. We'll respond within 24 hours with a creative conversation.</p>
+        <button class="btn btn-outline" onclick="resetContactForm()"><i class="fas fa-rotate-left"></i> Send Another</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo"><span style="color:#e8956d">Art</span> & Life</div>
+  <p style="font-size:.78rem">© 2026 Art & Life — Built with HTML, CSS & JavaScript</p>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#accordion">Explore</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+// ===== NAVIGATION =====
+const navbar = document.getElementById('navbar');
+const menuBtn = document.getElementById('menuBtn');
+const mobilePanel = document.getElementById('mobilePanel');
+const menuOverlay = document.getElementById('menuOverlay');
+
+// Scroll effect
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('small', window.scrollY > 50);
+  
+  // Active link highlight
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  let activeSection = '';
+  
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 130) {
+      activeSection = section.id;
+    }
+  });
+  
+  links.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + activeSection);
+  });
+});
+
+// Mobile menu
+function openMenu() {
+  mobilePanel.classList.add('open');
+  menuOverlay.classList.add('open');
+  menuBtn.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  mobilePanel.classList.remove('open');
+  menuOverlay.classList.remove('open');
+  menuBtn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+menuBtn.addEventListener('click', () => {
+  mobilePanel.classList.contains('open') ? closeMenu() : openMenu();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMenu();
+});
+
+// ===== SLIDESHOW =====
+const slideData = [
+  {
+    img: 'https://images.unsplash.com/photo-1541367777708-7905fe3296c0?w=1000&q=80&auto=format&fit=crop',
+    badge: 'Abstract Art',
+    title: 'The Language of Color',
+    text: 'Colors speak where words fail — abstract art reaches the soul directly'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=1000&q=80&auto=format&fit=crop',
+    badge: 'Sculpture',
+    title: 'Form Given to Feeling',
+    text: 'Sculpture transforms raw stone into emotions frozen in eternal time'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1551913902-c92207136625?w=1000&q=80&auto=format&fit=crop',
+    badge: 'Photography',
+    title: 'A Moment, Made Eternal',
+    text: 'Photography freezes a heartbeat of life into a permanent memory'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1000&q=80&auto=format&fit=crop',
+    badge: 'Street Art',
+    title: 'Cities as Canvas',
+    text: 'When city walls become galleries and streets become museums'
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1000&q=80&auto=format&fit=crop',
+    badge: 'Painting',
+    title: 'Creation in Motion',
+    text: 'The act of making art is itself a meditation'
+  }
+];
+
+const slidesContainer = document.getElementById('slidesContainer');
+const dotsContainer = document.getElementById('dotsContainer');
+const thumbsContainer = document.getElementById('thumbsContainer');
+const progressBar = document.getElementById('progressBar');
+const currentSpan = document.getElementById('currentSlide');
+
+let currentIndex = 0;
+let autoTimer = null;
+let progressTimer = null;
+
+// Create slides
+slideData.forEach((item, index) => {
+  // Slide
+  const slide = document.createElement('div');
+  slide.className = `slide ${index === 0 ? 'active' : ''}`;
+  slide.innerHTML = `
+    <img src="${item.img}" alt="${item.badge}">
+    <div class="slide-caption">
+      <span class="caption-badge">${item.badge}</span>
+      <h3>${item.title}</h3>
+      <p>${item.text}</p>
+    </div>
+  `;
+  slidesContainer.appendChild(slide);
+  
+  // Dot
+  const dot = document.createElement('button');
+  dot.className = `dot ${index === 0 ? 'active' : ''}`;
+  dot.onclick = () => goToSlide(index);
+  dotsContainer.appendChild(dot);
+  
+  // Thumb
+  const thumb = document.createElement('div');
+  thumb.className = `thumb ${index === 0 ? 'active' : ''}`;
+  thumb.innerHTML = `<img src="${item.img}" alt="">`;
+  thumb.onclick = () => goToSlide(index);
+  thumbsContainer.appendChild(thumb);
+});
+
+function goToSlide(index) {
+  // Remove active classes
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+  
+  // Set new active
+  currentIndex = (index + slideData.length) % slideData.length;
+  document.querySelectorAll('.slide')[currentIndex].classList.add('active');
+  document.querySelectorAll('.dot')[currentIndex].classList.add('active');
+  document.querySelectorAll('.thumb')[currentIndex].classList.add('active');
+  currentSpan.textContent = currentIndex + 1;
+  
+  resetProgress();
+}
+
+function changeSlide(direction) {
+  goToSlide(currentIndex + direction);
+}
+
+function startProgress() {
+  let width = 0;
+  clearInterval(progressTimer);
+  progressBar.style.width = '0%';
+  
+  progressTimer = setInterval(() => {
+    width += 100 / (4000 / 100);
+    progressBar.style.width = Math.min(width, 100) + '%';
+  }, 100);
+}
+
+function resetProgress() {
+  clearInterval(progressTimer);
+  clearTimeout(autoTimer);
+  startProgress();
+  autoTimer = setTimeout(() => changeSlide(1), 4000);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') changeSlide(-1);
+  if (e.key === 'ArrowRight') changeSlide(1);
+});
+
+resetProgress();
+
+// ===== ACCORDION =====
+const accordionData = [
+  {
+    num: 'I',
+    title: 'What is the relationship between Art and Life?',
+    content: '<b>Art and life are inseparable.</b> Art is not merely decoration — it is a reflection of life itself. Every great work captures something true about the human condition: our joys, sorrows, fears, and hopes. Life provides the raw material; art gives it meaning, form, and permanence.'
+  },
+  {
+    num: 'II',
+    title: 'Why is art important for mental and emotional wellbeing?',
+    content: '<b>Art is deeply therapeutic.</b> Creating or experiencing art activates the brain\'s reward system, reduces cortisol, and promotes mindfulness. Art therapy is used clinically to treat anxiety, depression, and trauma. Even visiting a museum or painting for 30 minutes can significantly reduce stress.'
+  },
+  {
+    num: 'III',
+    title: 'How has art shaped human civilization throughout history?',
+    content: '<b>Art is the mirror of civilization.</b> From cave paintings of Lascaux to Renaissance masterpieces, from Islamic calligraphy to Mughal miniatures — art has documented human history, transmitted cultural values, and challenged political power. Art always outlives empires.'
+  },
+  {
+    num: 'IV',
+    title: 'Can everyday life itself be considered a form of art?',
+    content: '<b>Absolutely — and this is the highest form of art.</b> The Japanese concept of "ichi-go ichi-e" treats every moment of life as a unique, unrepeatable artwork. How you set a table, write a letter, tend a garden — all can be approached with artistic intention. Life becomes art when we bring full attention to every act.'
+  },
+  {
+    num: 'V',
+    title: 'How can one develop creativity and an artistic eye?',
+    content: '<b>Creativity is a skill, not a gift.</b> You develop it through daily practice, close observation, and wide exposure. Visit galleries and museums. Keep a sketchbook or journal. Study the masters across all disciplines. Learn to see the extraordinary in the ordinary. Make things every single day.'
+  }
+];
+
+const accordionContainer = document.getElementById('accordionContainer');
+
+accordionData.forEach((item, index) => {
+  const accordionItem = document.createElement('div');
+  accordionItem.className = 'accordion-item';
+  accordionItem.innerHTML = `
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="header-left">
+        <span class="accordion-number">${item.num}</span>
+        <span class="accordion-title">${item.title}</span>
+      </div>
+      <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content">${item.content}</div>
+    </div>
+  `;
+  accordionContainer.appendChild(accordionItem);
+});
+
+function toggleAccordion(header) {
+  const item = header.parentElement;
+  const body = item.querySelector('.accordion-body');
+  const isOpen = item.classList.contains('open');
+  
+  // Close all
+  document.querySelectorAll('.accordion-item').forEach(it => {
+    it.classList.remove('open');
+    it.querySelector('.accordion-body').style.maxHeight = '0';
+  });
+  
+  // Open current if it was closed
+  if (!isOpen) {
+    item.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  }
+}
+
+// ===== FORM VALIDATION =====
+const rules = {
+  name: { required: true, test: v => v.trim().length >= 2, error: 'Name must be at least 2 characters' },
+  email: { required: true, test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()), error: 'Enter a valid email' },
+  phone: { required: false, test: v => v.trim() === '' || /^[\d\s\+\-\(\)]{10,15}$/.test(v.trim()), error: 'Enter valid phone (10-15 digits)' },
+  subject: { required: true, test: v => v !== '', error: 'Please select an option' },
+  message: { required: true, test: v => v.trim().length >= 20, error: 'Message must be at least 20 characters' }
+};
+
+function validateField(fieldName) {
+  const input = document.getElementById(fieldName);
+  const field = document.getElementById(fieldName + 'Field');
+  const errorEl = document.getElementById(fieldName + 'Error');
+  const value = input.value;
+  const rule = rules[fieldName];
+  
+  // Remove previous classes
+  field.classList.remove('valid', 'invalid', 'shake');
+  
+  // Check if empty and required
+  if (rule.required && value.trim() === '') {
+    field.classList.add('invalid');
+    errorEl.textContent = fieldName === 'subject' ? 'Please select an option' : `Please enter your ${fieldName}`;
+    return false;
+  }
+  
+  // Check validation
+  if (!rule.test(value)) {
+    field.classList.add('invalid');
+    errorEl.textContent = rule.error;
+    return false;
+  }
+  
+  // Valid
+  field.classList.add('valid');
+  errorEl.textContent = '';
+  return true;
+}
+
+function shakeField(fieldName) {
+  const field = document.getElementById(fieldName + 'Field');
+  if (field.classList.contains('invalid')) {
+    field.classList.add('shake');
+    setTimeout(() => field.classList.remove('shake'), 500);
+  }
+}
+
+function updateCharCount() {
+  const message = document.getElementById('message');
+  const countEl = document.getElementById('charCount');
+  const len = message.value.length;
+  countEl.textContent = len + ' / 500 characters';
+  
+  if (len > 500) {
+    message.value = message.value.substring(0, 500);
+    countEl.textContent = '500 / 500 characters';
+  }
+}
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const fields = ['name', 'email', 'phone', 'subject', 'message'];
+  let allValid = true;
+  
+  fields.forEach((field, index) => {
+    const isValid = validateField(field);
+    if (!isValid) {
+      allValid = false;
+      setTimeout(() => shakeField(field), index * 60);
+    }
+  });
+  
+  if (!allValid) return;
+  
+  // Show loading
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+  
+  // Simulate send
+  setTimeout(() => {
+    this.style.display = 'none';
+    document.getElementById('successMessage').classList.add('show');
+  }, 1500);
+});
+
+function resetContactForm() {
+  const form = document.getElementById('contactForm');
+  form.reset();
+  form.style.display = '';
+  document.getElementById('successMessage').classList.remove('show');
+  
+  document.getElementById('submitBtn').disabled = false;
+  document.getElementById('submitBtn').innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+  document.getElementById('charCount').textContent = '0 / 500 characters';
+  
+  ['name', 'email', 'phone', 'subject', 'message'].forEach(field => {
+    const fieldEl = document.getElementById(field + 'Field');
+    fieldEl.classList.remove('valid', 'invalid', 'shake');
+    document.getElementById(field + 'Error').textContent = '';
+  });
+}
+
+// ===== REVEAL ON SCROLL =====
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
