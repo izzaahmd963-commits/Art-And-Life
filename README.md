@@ -17,6 +17,7 @@ A responsive website celebrating art and life with interactive features.
 - Google Fonts
 - Unsplash Images
 - I have added the CSS and JavaScript code inside the **index.html** file. You can check everything there.
+- And this is **Lab Task 5** of **Web Engineering**.
 
 ## Demo
 Link (  https://izzaahmd963-commits.github.io/Art-And-Life/ )
