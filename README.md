@@ -16,7 +16,7 @@ A responsive website celebrating art and life with interactive features.
 - Font Awesome 6
 - Google Fonts
 - Unsplash Images
-- create one file all code already save index.html
+- I have added the CSS and JavaScript code inside the **index.html** file. You can check everything there.
 
 ## Demo
-Link (  )
+Link (  https://izzaahmd963-commits.github.io/Art-And-Life/ )
